@@ -31,6 +31,7 @@ for msg in st.session_state.messages[1:]:  # system-prompt auslassen
     st.markdown(f"**{role}:** {msg['content']}")
 
 # Eingabefeld für neue Nachricht
+st.session_state["user_input"] = ""
 user_input = st.text_input("Deine Eingabe", key="user_input")
 
 if st.button("Senden") and user_input:
@@ -46,5 +47,4 @@ if st.button("Senden") and user_input:
         )
         bot_reply = response.choices[0].message.content
         st.session_state.messages.append({"role": "assistant", "content": bot_reply})
-        st.session_state["user_input"] = ""
         st.rerun()
