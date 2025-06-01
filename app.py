@@ -1,9 +1,12 @@
 import streamlit as st
-import openai
 import os
+from openai import OpenAI
 
-# OpenAI-API-Key sicher aus Umgebungsvariable laden
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# OpenAI-Client initialisieren
+client = OpenAI()
+
+# OpenAI-API-Key automatisch aus Umgebungsvariablen verwenden
+# (Das macht die openai-Bibliothek selbst intern, wenn du es so aufsetzt)
 
 # Streamlit-Seiteneinstellungen
 st.set_page_config(page_title="KI-Projektideen-Chatbot", layout="centered")
@@ -36,11 +39,11 @@ if st.button("Senden") and user_input:
     
     # Anfrage an OpenAI senden
     with st.spinner("Bot denkt..."):
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=st.session_state.messages,
             temperature=0.6
         )
-        bot_reply = response["choices"][0]["message"]["content"]
+        bot_reply = response.choices[0].message.content
         st.session_state.messages.append({"role": "assistant", "content": bot_reply})
         st.experimental_rerun()
