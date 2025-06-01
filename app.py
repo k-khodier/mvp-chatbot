@@ -34,9 +34,7 @@ for msg in st.session_state.messages[1:]:  # system-prompt auslassen
 
 # Jetzt wird das Textfeld gerendert (es ist bereits geleert)
  
-myinput = st.text_input("Deine Eingabe", key="user_input")
-st.session_state["user_input"] = ""
-user_input=myinput
+user_input = st.text_input("Deine Eingabe", key="user_input")
 
 if st.button("Senden") and user_input:
     # Neue Nachricht speichern
