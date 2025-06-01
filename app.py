@@ -31,8 +31,7 @@ for msg in st.session_state.messages[1:]:  # system-prompt auslassen
     st.markdown(f"**{role}:** {msg['content']}")
 
 # Eingabefeld für neue Nachricht
-st.session_state["user_input"] = ""
-user_input = st.text_input("Deine Eingabe", key="user_input")
+user_input = st.text_input("Deine Eingabe")
 
 if st.button("Senden") and user_input:
     # Neue Nachricht speichern
