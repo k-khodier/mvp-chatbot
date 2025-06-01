@@ -1,7 +1,6 @@
 import streamlit as st
 import os
 from openai import OpenAI
-import uuid  # für zufälligen Key
 
 # OpenAI-Client initialisieren
 client = OpenAI()
@@ -28,9 +27,8 @@ for msg in st.session_state.messages[1:]:  # system-prompt auslassen
     role = "Du" if msg["role"] == "user" else "Bot"
     st.markdown(f"**{role}:** {msg['content']}")
 
-# Eingabefeld mit dynamischem Key, um es zu leeren
-unique_key = str(uuid.uuid4())
-user_input = st.text_input("Deine Eingabe", key=unique_key)
+# Eingabefeld für neue Nachricht
+user_input = st.text_input("Deine Eingabe", key="user_input")
 
 if st.button("Senden") and user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
