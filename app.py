@@ -30,8 +30,11 @@ for msg in st.session_state.messages[1:]:  # system-prompt auslassen
     role = "Du" if msg["role"] == "user" else "Bot"
     st.markdown(f"**{role}:** {msg['content']}")
 
-# Eingabefeld für neue Nachricht
-user_input = st.text_input("Deine Eingabe")
+
+
+# Jetzt wird das Textfeld gerendert (es ist bereits geleert)
+user_input = st.text_input("Deine Eingabe", key="user_input")
+st.session_state["user_input"] = ""
 
 if st.button("Senden") and user_input:
     # Neue Nachricht speichern
